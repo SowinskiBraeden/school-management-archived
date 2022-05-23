@@ -3,10 +3,10 @@
     <router-link to="/" type="button" class="btn btn-secondary">Back</router-link>
   </nav>
   <div class="login-form">
-    <h1>Student Login</h1>
+    <h1>Admin Login</h1>
     <!-- SID input -->
     <div class="form-outline mb-4">
-      <label class="form-label" for="sid">Student #</label>
+      <label class="form-label" for="sid">Admin #</label>
       <input type="text" id="sid" class="form-control" />
     </div>
 
@@ -44,7 +44,7 @@
       login () {
         const loginObject = JSON.stringify({ sid: document.getElementById('sid').value, password: document.getElementById('pass').value })
 
-        axios.post('http://localhost:8000/api/v1/student/login',
+        axios.post('http://localhost:8000/api/v1/admin/login',
           loginObject,
           { headers: { 'Content-Type': 'application/json' } })
         .catch(function (error) {
