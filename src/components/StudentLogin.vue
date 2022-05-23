@@ -26,7 +26,7 @@
 
     <!-- Submit button -->
     <button v-on:click="login()" type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
-    <p class="text-danger ">{{ error }}</p>
+    <p class="text-danger">{{ error }}</p>
   </div>
 </template>
 
@@ -48,7 +48,7 @@
           loginObject,
           { headers: { 'Content-Type': 'application/json' } })
         .catch(function (error) {
-            if (error.response) this.error = error.response.data.message
+          this.error = error.response.data.message
         }).then(res => {
           if (res.data.success) {
             // this.$router.push('/student-dashboard')

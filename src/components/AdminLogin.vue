@@ -34,7 +34,7 @@
   import axios from 'axios'
 
   export default {
-    name: 'StudentLogin',
+    name: 'AdminLogin',
     data () {
       return {
         error: ''
@@ -42,13 +42,13 @@
     },
     methods: {
       login () {
-        const loginObject = JSON.stringify({ sid: document.getElementById('sid').value, password: document.getElementById('pass').value })
+        const loginObject = JSON.stringify({ aid: document.getElementById('sid').value, password: document.getElementById('pass').value })
 
         axios.post('http://localhost:8000/api/v1/admin/login',
           loginObject,
           { headers: { 'Content-Type': 'application/json' } })
         .catch(function (error) {
-            if (error.response) this.error = error.response.data.message
+          this.error = error.response.data.message
         }).then(res => {
           if (res.data.success) {
             // this.$router.push('/student-dashboard')
