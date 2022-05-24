@@ -1,11 +1,15 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../components/Home.vue'
-import StudentLogin from '../components/StudentLogin.vue'
-import TeacherLogin from '../components/TeacherLogin.vue'
-import AdminLogin from '../components/AdminLogin.vue'
-import StudentDashboard from '../components/StudentDashboard.vue'
-import TeacherDashboard from '../components/TeacherDashboard.vue'
-import AdminDashboard from '../components/AdminDashboard.vue'
+
+// Login Components
+import StudentLogin from '../components/Login/StudentLogin.vue'
+import TeacherLogin from '../components/Login/TeacherLogin.vue'
+import AdminLogin from '../components/Login/AdminLogin.vue'
+
+// Dashboard Components
+import StudentDashboard from '../components/Dashboard/StudentDashboard.vue'
+import TeacherDashboard from '../components/Dashboard/TeacherDashboard.vue'
+import AdminDashboard from '../components/Dashboard/AdminDashboard.vue'
 
 const routes: Array<RouteRecordRaw> = [
   // Default page
