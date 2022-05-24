@@ -23,7 +23,7 @@
     },
     methods: {
       getTeacher: function () {
-        axios.get('http://localhost:8000/api/v1/teacher', { withCredentials: true })
+        axios.get(`${process.env.VUE_APP_API_URL}/teacher`, { withCredentials: true })
         .catch(error => {
           if (error) this.$router.push('/teacher-login')
         })
@@ -34,7 +34,7 @@
         })
       },
       logout: function () {
-        axios.post('http://localhost:8000/api/v1/logout', {}, { withCredentials: true })
+        axios.post(`${process.env.VUE_APP_API_URL}/logout`, {}, { withCredentials: true })
         .then((res) => {
           if (res.data.success) {
             this.$router.push('/')

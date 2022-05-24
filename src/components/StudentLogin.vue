@@ -44,7 +44,7 @@
       login () {
         const loginObject = JSON.stringify({ sid: document.getElementById('sid').value, password: document.getElementById('pass').value })
 
-        axios.post('http://localhost:8000/api/v1/student/login',
+        axios.post(`${process.env.VUE_APP_API_URL}/student/login`,
           loginObject,
           { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
         )
@@ -59,7 +59,7 @@
         })
       },
       isAuthenticated () {
-        axios.get('http://localhost:8000/api/v1/student', { withCredentials: true })
+        axios.get(`${process.env.VUE_APP_API_URL}/student`, { withCredentials: true })
         .then((res) => {
           if (res.data.success) {
             this.$router.push('/student-dashboard')
