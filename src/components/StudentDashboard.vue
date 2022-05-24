@@ -30,7 +30,7 @@
       getStudent: function () {
         axios.get('http://localhost:8000/api/v1/student', { withCredentials: true })
         .catch(error => {
-          console.log(error)
+          if (error) this.$router.push('/student-login')
         })
         .then((res) => {
           if (res.data.success) {

@@ -25,7 +25,7 @@
       getTeacher: function () {
         axios.get('http://localhost:8000/api/v1/teacher', { withCredentials: true })
         .catch(error => {
-          console.log(error)
+          if (error) this.$router.push('/teacher-login')
         })
         .then((res) => {
           if (res.data.success) {

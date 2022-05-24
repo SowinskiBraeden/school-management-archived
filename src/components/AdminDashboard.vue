@@ -26,7 +26,7 @@
       getAdmin: function () {
         axios.get('http://localhost:8000/api/v1/admin', { withCredentials: true })
         .catch(error => {
-          console.log(error)
+          if (error) this.$router.push('/admin-login')
         })
         .then((res) => {
           if (res.data.success) {
