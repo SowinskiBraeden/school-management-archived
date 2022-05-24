@@ -34,7 +34,7 @@
   import axios from 'axios'
 
   export default {
-    name: 'AdminLogin',
+    name: 'TeacherLogin',
     data () {
       return {
         error: ''
@@ -46,18 +46,29 @@
 
         axios.post('http://localhost:8000/api/v1/teacher/login',
           loginObject,
-          { headers: { 'Content-Type': 'application/json' } })
+          { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
+        )
         .catch(function (error) {
           this.error = error.response.data.message
         }).then(res => {
           if (res.data.success) {
-            // this.$router.push('/student-dashboard')
-            this.error = 'successfully logged in'
+            this.$router.push('/teacher-dashboard')
           } else {
             this.error = res.data.message
           }
         })
+      },
+      isAuthenticated () {
+        axios.get('http://localhost:8000/api/v1/teacher', { withCredentials: true })
+        .then((res) => {
+          if (res.data.success) {
+            this.$router.push('/teacher-dashboard')
+          }
+        })
       }
+    },
+    created: function () {
+      this.isAuthenticated()
     }
   }
 </script>

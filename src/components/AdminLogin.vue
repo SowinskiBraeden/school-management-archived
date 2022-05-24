@@ -46,18 +46,29 @@
 
         axios.post('http://localhost:8000/api/v1/admin/login',
           loginObject,
-          { headers: { 'Content-Type': 'application/json' } })
+          { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
+        )
         .catch(function (error) {
           this.error = error.response.data.message
         }).then(res => {
           if (res.data.success) {
-            // this.$router.push('/student-dashboard')
-            this.error = 'successfully logged in'
+            this.$router.push('/admin-dashboard')
           } else {
             this.error = res.data.message
           }
         })
+      },
+      isAuthenticated () {
+        axios.get('http://localhost:8000/api/v1/admin', { withCredentials: true })
+        .then((res) => {
+          if (res.data.success) {
+            this.$router.push('/admin-dashboard')
+          }
+        })
       }
+    },
+    created: function () {
+      this.isAuthenticated()
     }
   }
 </script>
