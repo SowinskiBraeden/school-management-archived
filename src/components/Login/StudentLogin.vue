@@ -13,7 +13,7 @@
     <!-- Password input -->
     <div class="form-outline mb-4">
       <label class="form-label" for="pass">Password</label>
-      <input type="password" id="pass" class="form-control" />
+      <input @keyup.enter="login()" type="password" id="pass" class="form-control" />
     </div>
 
     <!-- 2 column grid layout for inline styling -->
@@ -25,7 +25,7 @@
     </div>
 
     <!-- Submit button -->
-    <button v-on:click="login()" type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+    <button @click="login()" type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
     <p class="text-danger">{{ error }}</p>
   </div>
 </template>
@@ -42,6 +42,7 @@
     },
     methods: {
       login () {
+        this.error = '' // Hide any errors till new one is recieved
         const loginObject = JSON.stringify({ sid: document.getElementById('sid').value, password: document.getElementById('pass').value })
 
         axios.post(`${process.env.VUE_APP_API_URL}/student/login`,
