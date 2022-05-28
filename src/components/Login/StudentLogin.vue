@@ -41,6 +41,9 @@
       }
     },
     methods: {
+      exists (e) {
+        return (e !== undefined && e !== null && e !== '')
+      },
       login () {
         this.error = '' // Hide any errors till new one is recieved
         const loginObject = JSON.stringify({ sid: document.getElementById('sid').value, password: document.getElementById('pass').value })
@@ -69,7 +72,9 @@
       }
     },
     created: function () {
-      this.isAuthenticated()
+      const hasError = new URL(location.href).searchParams.get('error')
+      if (this.exists(hasError)) this.error = hasError
+      else this.isAuthenticated()
     }
   }
 </script>

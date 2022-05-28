@@ -30,10 +30,12 @@
       getStudent: function () {
         axios.get(`${process.env.VUE_APP_API_URL}/student`, { withCredentials: true })
         .catch(error => {
-          if (error) this.$router.push('/student-login')
+          if (error) {
+            this.$router.push(`/login-student?error=${encodeURI(error.response.data.message)}`)
+          }
         })
         .then((res) => {
-          if (res.data.success) {
+          if (res && res.data.success) {
             this.student = res.data.response.student
             this.locker = res.data.response.locker
             this.photo = `data:image/jpeg;base64,${res.data.response.photo.base64}`
