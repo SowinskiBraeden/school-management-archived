@@ -4,10 +4,22 @@
   </nav>
 
   <h1>Teacher Dashboard</h1>
-  <div v-if="teacher!=null">
-    <h6>Name: {{ teacher.personaldata.firstname }} {{ teacher.personaldata.lastname }}</h6>
-    <h6>Email: {{ teacher.accountdata.schoolemail }}</h6>
-    <h6>Student ID: {{ teacher.schooldata.tid }}</h6>
+  <div v-if="!waiting">
+    <div v-if="teacher!=null">
+      <h6>Name: {{ teacher.personaldata.firstname }} {{ teacher.personaldata.lastname }}</h6>
+      <h6>Email: {{ teacher.accountdata.schoolemail }}</h6>
+      <h6>Student ID: {{ teacher.schooldata.tid }}</h6>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div v-else class="loader">
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__ball"></div>
   </div>
 </template>
 
@@ -18,6 +30,7 @@
     name: 'TeacherDashboard',
     data () {
       return {
+        waiting: true,
         teacher: null
       }
     },
@@ -30,6 +43,7 @@
         .then((res) => {
           if (res.data.success) {
             this.teacher = res.data.result
+            this.waiting = false
           }
         })
       },

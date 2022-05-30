@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <router-link to="/" type="button" class="btn btn-secondary">Back</router-link>
   </nav>
-  <div class="login-form">
+  <div v-if="!waiting" class="login-form">
     <h1>Teacher Login</h1>
     <!-- SID input -->
     <div class="form-outline mb-4">
@@ -28,6 +28,16 @@
     <button v-on:click="login()" type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
     <p class="text-danger ">{{ error }}</p>
   </div>
+
+  <!-- Loading -->
+  <div v-else class="loader">
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__ball"></div>
+  </div>
 </template>
 
 <script>
@@ -37,11 +47,14 @@
     name: 'TeacherLogin',
     data () {
       return {
-        error: ''
+        error: '',
+        waiting: false
       }
     },
     methods: {
       login () {
+        this.error = '' // Hide any errors till new one is recieved
+        this.waiting = true
         const loginObject = JSON.stringify({ tid: document.getElementById('sid').value, password: document.getElementById('pass').value })
 
         axios.post(`${process.env.VUE_APP_API_URL}/teacher/login`,
@@ -50,11 +63,13 @@
         )
         .catch(function (error) {
           this.error = error.response.data.message
+          this.waiting = false
         }).then(res => {
           if (res.data.success) {
             this.$router.push('/teacher-dashboard')
           } else {
             this.error = res.data.message
+            this.waiting = false
           }
         })
       },
@@ -74,6 +89,7 @@
 </script>
 
 <style>
+  @import '../../assets/styles/loader.css';
   .login-form {
     position: absolute;
     left: 50%;

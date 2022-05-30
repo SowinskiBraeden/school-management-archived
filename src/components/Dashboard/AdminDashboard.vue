@@ -4,12 +4,23 @@
   </nav>
 
   <h1>Admin Dashboard</h1>
-  <div v-if="admin!=null">
-    <h6>Name: {{ admin.firstname }} {{ admin.lastname }}</h6>
-    <h6>Email: {{ admin.schoolemail }}</h6>
-    <h6>Student ID: {{ admin.aid }}</h6>
+  <div v-if="!waiting">
+    <div v-if="admin!=null">
+      <h6>Name: {{ admin.firstname }} {{ admin.lastname }}</h6>
+      <h6>Email: {{ admin.schoolemail }}</h6>
+      <h6>Student ID: {{ admin.aid }}</h6>
+    </div>
   </div>
 
+  <!-- Loading -->
+  <div v-else class="loader">
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__ball"></div>
+  </div>
 </template>
 
 <script>
@@ -19,6 +30,7 @@
     name: 'Admin',
     data () {
       return {
+        waiting: true,
         admin: null
       }
     },
@@ -31,6 +43,7 @@
         .then((res) => {
           if (res.data.success) {
             this.admin = res.data.result
+            this.waiting = false
           }
         })
       },

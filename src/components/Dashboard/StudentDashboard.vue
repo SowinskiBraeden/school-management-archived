@@ -4,13 +4,24 @@
   </nav>
 
   <h1>Student Dashboard</h1>
-  <div v-if="student!=null">
-    <h6>Name: {{ student.personaldata.firstname }} {{ student.personaldata.lastname }}</h6>
-    <h6>Email: {{ student.accountdata.schoolemail }}</h6>
-    <h6>Student ID: {{ student.schooldata.sid }}</h6>
+  <div v-if="!waiting">
+    <div v-if="student!=null">
+      <h6>Name: {{ student.personaldata.firstname }} {{ student.personaldata.lastname }}</h6>
+      <h6>Email: {{ student.accountdata.schoolemail }}</h6>
+      <h6>Student ID: {{ student.schooldata.sid }}</h6>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div v-else class="loader">
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__bar"></div>
+    <div class="loader__ball"></div>
   </div>
   <img id='schoolimage' style='display:block; width:100px;height:100px;' src='' />
-
 </template>
 
 <script>
@@ -20,6 +31,7 @@
     name: 'StudentDashboard',
     data () {
       return {
+        waiting: true,
         student: null,
         locker: null,
         photo: null,
@@ -41,6 +53,7 @@
             this.photo = `data:image/jpeg;base64,${res.data.response.photo.base64}`
             document.getElementById('schoolimage').src = this.photo
             this.contacts = res.data.response.contacts
+            this.waiting = false
           }
         })
       },
