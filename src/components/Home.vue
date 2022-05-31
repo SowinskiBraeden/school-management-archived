@@ -1,5 +1,8 @@
 <template>
-  <h1>Login as</h1>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <router-link to="/#" type="button" class="btn btn-secondary">Apply to enroll</router-link>
+  </nav>
+  <h1 class="login-title">Login as</h1>
   <div class="options">
     <router-link to="/login-student" type="button" class="btn btn-success link"><strong>Student</strong></router-link>
     <router-link to="/login-teacher" type="button" class="btn btn-info link"><strong>Teacher</strong></router-link>
@@ -14,13 +17,15 @@ export default {
 </script>
 
 <style>
-  h1 {margin-top: 50px;}
+  .login-title {
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    transform: translate(-50%, -28%);
+  }
 
   .options {
-    margin: 0;
-    padding: 0;
     width: 100%;
-    height: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
