@@ -8,7 +8,7 @@
     <div v-if="admin!=null">
       <h6>Name: {{ admin.firstname }} {{ admin.lastname }}</h6>
       <h6>Email: {{ admin.schoolemail }}</h6>
-      <h6>Student ID: {{ admin.aid }}</h6>
+      <h6>Admin ID: {{ admin.aid }}</h6>
     </div>
   </div>
 
