@@ -2,12 +2,12 @@
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <router-link to="/" type="button" class="btn btn-secondary">Back</router-link>
   </nav>
-  <div v-if="!waiting" class="login-form">
+  <form v-if="!waiting" class="login-form">
     <h1>Student Login</h1>
     <!-- SID input -->
     <div class="form-outline mb-4">
       <label class="form-label" for="sid">Student #</label>
-      <input type="text" id="sid" class="form-control" />
+      <input @keyup.enter="next()" type="text" id="sid" class="form-control" autofocus/>
     </div>
 
     <!-- Password input -->
@@ -27,7 +27,7 @@
     <!-- Submit button -->
     <button @click="login()" type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
     <p class="text-danger">{{ error }}</p>
-  </div>
+  </form>
 
   <!-- Loading -->
   <div v-else class="loader">
@@ -55,6 +55,7 @@
       exists (e) {
         return (e !== undefined && e !== null && e !== '')
       },
+      next () { document.getElementById('pass').focus() },
       login () {
         this.error = '' // Hide any errors till new one is recieved
         this.waiting = true

@@ -7,13 +7,13 @@
     <!-- SID input -->
     <div class="form-outline mb-4">
       <label class="form-label" for="sid">Teacher #</label>
-      <input type="text" id="sid" class="form-control" />
+      <input @keyup.enter="next()" type="text" id="sid" class="form-control" autofocus/>
     </div>
 
     <!-- Password input -->
     <div class="form-outline mb-4">
       <label class="form-label" for="pass">Password</label>
-      <input type="password" id="pass" class="form-control" />
+      <input @keyup.enter="login()" type="password" id="pass" class="form-control" />
     </div>
 
     <!-- 2 column grid layout for inline styling -->
@@ -52,6 +52,7 @@
       }
     },
     methods: {
+      next () { document.getElementById('pass').focus() },
       login () {
         this.error = '' // Hide any errors till new one is recieved
         this.waiting = true
